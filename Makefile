@@ -5,4 +5,4 @@ run:
 	python manage.py runserver
 
 test: clean
-	python manage.py test
+	python manage.py test --settings=project.settings.test
