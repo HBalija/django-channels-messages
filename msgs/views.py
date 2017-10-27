@@ -6,12 +6,21 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseBadRequest
 from django.shortcuts import render, redirect
 
-from .forms import UserForm
+from .forms import UserForm, MessageForm
 from .models import Message
 
 
 def frontpage(request):
-    return render(request, 'index.html')
+    mess = Message.objects.all()
+    form = MessageForm()
+    if request.method == 'POST' and request.user.is_authenticated():
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.user = request.user
+            message.save()
+
+    return render(request, 'index.html', {'messages': mess})
 
 
 def user_login(request):

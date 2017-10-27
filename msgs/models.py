@@ -11,7 +11,7 @@ class User(AbstractUser):
 class Message(models.Model):
 
     user = models.ForeignKey(User, related_name="user")
-    content = models.TextField(max_length=500, blank=True)
+    message = models.TextField(max_length=500, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -26,8 +26,8 @@ class Message(models.Model):
         Data sent by channels for a new message.
         """
         data = {
-            'message': self.content,
-            'formated': naturaltime(self.content),
+            'message': self.message,
+            'formated': naturaltime(self.message),
             'timestamp': str(self.timestamp),
             'author': self.message_author.username,
             'id': self.id,

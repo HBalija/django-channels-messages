@@ -10,6 +10,48 @@
                 <div class="col-md-6 col-md-offset-3 pad-bottom" data-scroll-reveal="enter from the bottom after 0.2s">
                     <h2><strong>MESSAGES</strong></h2>
                 </div>
+
             </div>
 </div>
+
+<div class="container">
+            <div class="row text-center">
+            {% for mess in messages %}
+            <table>
+                <tr><h5>
+                   <td>{{ mess.user }}</td>
+                   <td>{{ mess.message }}</td>
+                   <td>{{ mess.timestamp }}</td>
+                </h5></tr>
+            </table>
+            {% endfor %}
+            </div>
+</div>
+<br>
+<div class="container">
+            <div class="row text-center">
+{% if user.is_authenticated %}
+ <form class="form-horizontal" action="" method="POST">
+            {% csrf_token %}
+            <fieldset>
+                    <div class="form-group"  id="formTextId">
+                        <div class="col-lg-12">
+                            <textarea class="form-control" cols="40" id="id_message" maxlength="500" name="message" placeholder="New message" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                <div class="form-group">
+                    <div class="col-lg-11">
+                        <button id="formButtonId" class="btn btn-brand">Send</button>
+                    </div>
+                </div>
+
+            </fieldset>
+            </form>
+    {% else %}
+                        <h4><strong>Login to write something</strong></34>
+{% endif %}
+</div>
+</div>
+
 {% endblock %}
