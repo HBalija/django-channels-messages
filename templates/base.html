@@ -1,0 +1,59 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+
+<head>
+    <!-- BOOTSTRAP CORE CSS -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" />
+    <!-- CUSTOM CSS -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+</head>
+<body>
+{% block navbar %}
+    <div class="navbar navbar-default navbar-fixed-top scroll-me">
+        <!-- pass scroll-me class above a tags to starts scrolling -->
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{% url 'frontpage' %}">HOME</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+                    <li>WELCOME, {{ user.username }}</li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}">LOGIN</a></li>
+                    <li><a href="{% url 'register' %}">JOIN</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block content %}
+
+    <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+    <!-- CORE JQUERY  SCRIPTS -->
+    <script src="{% static 'js/jquery-1.11.1.js' %}"></script>
+    <!-- BOOTSTRAP SCRIPTS  -->
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <!-- CUSTOM SCRIPTS   -->
+    <script src="{% static 'js/custom.js' %}"></script>
+{% endblock %}
+
+
+
+{% block js %}
+{% endblock %}
+</body>
+
+

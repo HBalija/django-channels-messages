@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+            <div class="row text-center">
+                <div class="col-md-6 col-md-offset-3 pad-bottom" data-scroll-reveal="enter from the bottom after 0.2s">
+
+                <form  method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.GET.next }}"/>
+
+                    <h2 class="">Welcome</h2>
+
+                    <div class="">
+                    <label for="inptuUsername" class="sr-only">Username</label>
+                    <input type="text" name="username" id="inputUsername" placeholder="Username"
+                           required autofocus>
+                    </div>
+                    <div>
+                        <label for="inputPassword" class="sr-only">Password</label>
+                        <input type="password" name="password" id="inputPassword"  placeholder="Password" required>
+                    </div>
+                    {% if login_error %}
+                        <p class="text-danger">{{ login_error }}</p>
+                    {% endif %}
+                    <button class="btn" type="submit">Sign in</button>
+
+                    <br>
+                    <p class="">Need an account? <strong><a href="{% url 'register' %}">Click here to join<span class="brand-txt">.</span></a></strong></p>
+                </form>
+
+                </div>
+            </div>
+</div>
+
+{% endblock %}
