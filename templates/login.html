@@ -22,14 +22,14 @@
                            required autofocus>
                     </div>
                     <div>
-                    <label for="inputPassword" class="sr-only">Password</label>
-                    <input type="password" name="password" id="inputPassword"  placeholder="Password" required>
+                        <label for="inputPassword" class="sr-only">Password</label>
+                        <input type="password" name="password" id="inputPassword"  placeholder="Password" required>
                     </div>
                     {% if login_error %}
                         <p class="text-danger">{{ login_error }}</p>
                     {% endif %}
                     <button class="btn" type="submit">Sign in</button>
-                    </div>
+
                     <br>
                     <p class="">Need an account? <strong><a href="{% url 'register' %}">Click here to join<span class="brand-txt">.</span></a></strong></p>
                 </form>
