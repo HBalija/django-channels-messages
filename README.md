@@ -13,7 +13,7 @@ Get the source from GitHub:
 
     git clone git@github.com:HBalija/django-channels-messages.git
 
-Navigate to the `brightest-list/` directory:
+Navigate to the project directory:
 
     cd django-channels-messages
 
