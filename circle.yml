@@ -6,4 +6,4 @@ machine:
 
 test:
   override:
-    - make test
+    - make circle-test
