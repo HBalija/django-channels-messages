@@ -11,16 +11,20 @@ from .models import Message
 
 
 def frontpage(request):
-    mess = Message.objects.all()
     form = MessageForm()
-    if request.method == 'POST' and request.user.is_authenticated():
-        form = MessageForm(request.POST)
-        if form.is_valid():
-            message = form.save(commit=False)
-            message.user = request.user
-            message.save()
+    messages = Message.objects.all()
+    # if request.method == 'POST' and request.user.is_authenticated():
+    #     form = MessageForm(request.POST)
+    #     if form.is_valid():
+    #         message = form.save(commit=False)
+    #         message.user = request.user
+    #         message.save()
+    context = {
+        'messages': messages,
+        'form': form
+    }
 
-    return render(request, 'index.html', {'messages': mess})
+    return render(request, 'index.html', context)
 
 
 def user_login(request):

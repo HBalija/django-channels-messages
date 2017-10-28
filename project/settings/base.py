@@ -23,6 +23,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'msgs',
+
+    'channels',
 ]
 
 AUTH_USER_MODEL = 'msgs.User'
@@ -98,3 +100,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgi_redis.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [ENV_STR('REDIS_URL', 'redis://localhost:6379')],
+        },
+        "ROUTING": "project.routing.channel_routing",
+    },
+}

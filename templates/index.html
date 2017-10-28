@@ -15,16 +15,21 @@
 </div>
 
 <div class="container">
-            <div class="row text-center">
-            {% for mess in messages %}
+            <div id="scroll_bottom" class="scroll_bar js-scroll-bar row text-center" data-msg="{{ messages }}">
             <table>
-                <tr><h5>
-                   <td>{{ mess.user }}</td>
-                   <td>{{ mess.message }}</td>
-                   <td>{{ mess.timestamp }}</td>
-                </h5></tr>
-            </table>
+            <tbody>
+            {% for message in messages %}
+                <tr>
+                    <td>
+                        {{ message.user.username}}:
+                    </td>
+                    <td class="col-xs-9">
+                        {{ message.message }}
+                  </td>
+            </tr>
             {% endfor %}
+            </tbody>
+            </table>
             </div>
 </div>
 <br>
@@ -48,8 +53,8 @@
 
             </fieldset>
             </form>
-    {% else %}
-                        <h4><strong>Login to write something</strong></34>
+{% else %}
+    <h4><strong>Login to write something</strong></34>
 {% endif %}
 </div>
 </div>
