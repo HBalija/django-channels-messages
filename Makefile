@@ -12,6 +12,10 @@ run: clean
 test: clean
 	python manage.py test --settings=project.settings.test
 
+circle-test:
+	python manage.py collectstatic --noinput --settings=project.settings.test
+	python manage.py test --settings=project.settings.test
+
 coverage: clean
 	coverage run --source=. manage.py test --settings=project.settings.test
 	coverage html
