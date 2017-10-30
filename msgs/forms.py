@@ -53,6 +53,26 @@ class UserForm(forms.ModelForm):
             return data
 
 
+class UserLoginForm(forms.Form):
+
+    username = forms.CharField(widget=forms.TextInput(
+        attrs={
+            'class': "form-control",
+            'placeholder': "Username",
+            'required': '',
+            'autofocus': ''
+        }),
+        required=True,)
+
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={
+            'class': "form-control",
+            'placeholder': "Password",
+            'required': ''
+        }),
+        required=True)
+
+
 class MessageForm(forms.ModelForm):
     message = forms.CharField(widget=forms.Textarea(
         attrs={'class': "form-control",

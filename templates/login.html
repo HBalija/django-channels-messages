@@ -7,17 +7,17 @@
         <div class="col-md-6 col-md-offset-3">
             <form  method="POST" action="{% url 'login' %}">
                 {% csrf_token %}
-                <div>
-                    <label class="sr-only">Username</label>
-                    <input type="text" name="username" placeholder="Username" required>
-                </div>
-                <div>
-                    <label class="sr-only">Password</label>
-                    <input type="password" name="password" placeholder="Password" required>
-                </div>
-                {% if login_error %}
-                    <p class="text-danger">{{ login_error }}</p>
-                {% endif %}
+            {{ form.non_field_errors }}
+            {% for field in form %}
+            <div>
+                {{ field }}
+            </div>
+            {% endfor %}
+            {% if login_error %}
+             <div>
+                <p class="text-danger">{{ login_error }}</p>
+            </div>
+            {% endif %}
                 <button class="btn btn-brand" type="submit">Sign in</button>
                 <p>Need an account? <strong><a href="{% url 'register' %}">Click here to join</a></strong></p>
             </form>

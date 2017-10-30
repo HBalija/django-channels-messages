@@ -5,7 +5,7 @@
     <div class="row text-center">
         <h2 >Welcome</h2>
         <div class="col-md-6 col-md-offset-3">
-            <form class="" method="post" action="{% url 'register' %}">
+            <form method="post" action="{% url 'register' %}">
             {% csrf_token %}
             {{ form.non_field_errors }}
             {% for field in form %}

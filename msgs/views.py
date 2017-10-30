@@ -3,11 +3,11 @@ from __future__ import unicode_literals
 
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseBadRequest, JsonResponse
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 
-from .forms import UserForm, MessageForm
+from .forms import UserForm, MessageForm, UserLoginForm
 from .models import Message
 
 
@@ -27,23 +27,25 @@ def user_login(request):
     if request.user.is_authenticated():
         return redirect('frontpage')
 
+    form = UserLoginForm()
+
     if request.method == "POST":
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        if not username or not password:
-            return HttpResponseBadRequest()
+        form = UserLoginForm(request.POST)
 
-        user = authenticate(username=username, password=password)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
 
-        if user:
-            login(request, user)
-            return redirect('frontpage')
+            user = authenticate(username=username, password=password)
 
-        else:
-            error = "Wrong username or password."
-            return render(request, 'login.html', {'login_error': error})
+            if user:
+                login(request, user)
+                return redirect('frontpage')
+            else:
+                error = "Wrong username or password."
+                return render(request, 'login.html', {'form': form, 'login_error': error})
 
-    return render(request, 'login.html')
+    return render(request, 'login.html', {'form': form})
 
 
 @login_required
