@@ -1,38 +1,32 @@
 ﻿$(document).ready(function () { // eslint-disable-line
-
-    var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+    var wsScheme = window.location.protocol === "https:" ? "wss" : "ws";
 
     // messaging socket
-    socket_message = new WebSocket(ws_scheme + "://" + window.location.host + "/");
-    $("#formButtonId").click(function(event)  {
-        event.preventDefault(); // cancel default behavior
-        if (!$('#id_message').val()) return;
-        socket_message.send($('#id_message').val())
+    var socketMessage = new WebSocket(wsScheme + "://" + window.location.host + "/");
+
+    $("#formButtonId").click(function(event) { // eslint-disable-line
+        event.preventDefault();
+        // don't send if area empty
+        if (!$('#id_message').val()) {
+            return;
+        }
+        // sending message
+        socketMessage.send($('#id_message').val());
+        // clearing textarea
         $('#id_message').val('');
     });
 
-    var $scrollDiv = $(".js-scroll-bar");
-
-    // check if message exists (if not, message table is hidden)
-    if($scrollDiv.attr("data-msg") === "[]") {
-        $scrollDiv.hide();
-    }
-
-    socket_message.onmessage = function(e) {
+    socketMessage.onmessage = function (e) {  // eslint-disable-line
         var data = JSON.parse(e.data);
-        var msgRow = "<tr><td>" + data.user + "</td><td>" + data.message + "</td></tr>"
+        var msgRow = "<li><strong>" + data.user + "</strong>: " + data.message + "</li>";
 
-        $("table").find("tbody").append(msgRow)
+        $("ul").find(".messages-list").append(msgRow);
+    };
 
-        // show message table
-        $scrollDiv.show();
-
-        scroll_div.scrollTop = scroll_div.scrollHeight;
-    }
-
-    var scroll_div = document.getElementById("scroll_bottom");
-    if (scroll_div) {
-        scroll_div.scrollTop = scroll_div.scrollHeight;
-    }
-
+    $("#id_message").keydown(function (event) {  // eslint-disable-line
+        if (event.keyCode === 13 && !event.shiftKey) {
+            event.preventDefault();
+            $("#formButtonId").click();
+        }
+    });
 });

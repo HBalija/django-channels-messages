@@ -13,12 +13,7 @@ from .models import Message
 def frontpage(request):
     form = MessageForm()
     messages = Message.objects.all()
-    # if request.method == 'POST' and request.user.is_authenticated():
-    #     form = MessageForm(request.POST)
-    #     if form.is_valid():
-    #         message = form.save(commit=False)
-    #         message.user = request.user
-    #         message.save()
+
     context = {
         'messages': messages,
         'form': form
@@ -29,7 +24,7 @@ def frontpage(request):
 
 def user_login(request):
     if request.user.is_authenticated():
-        return render(request, 'frontpage.html')
+        return redirect('frontpage')
 
     if request.method == "POST":
         username = request.POST.get('username')
@@ -37,16 +32,15 @@ def user_login(request):
         if not username or not password:
             return HttpResponseBadRequest()
 
-        user = authenticate(username=username,
-                            password=password)
+        user = authenticate(username=username, password=password)
 
         if user:
             login(request, user)
             return redirect('frontpage')
 
         else:
-            return render(request, 'login.html',
-                          {'login_error': "Wrong username or password."})
+            error = "Wrong username or password."
+            return render(request, 'login.html', {'login_error': error})
 
     return render(request, 'login.html')
 
