@@ -9,12 +9,10 @@
     </div>
 
     <div class="row">
-    <ul>
-        <span class="messages-list">
+    <ul class="messages-list" id="js-scrollbar">
         {% for message in messages %}
             <li><strong>{{ message.user.username}}</strong>: {{ message.message }}</li>
         {% endfor %}
-    </span>
     </ul>
     </div>
 
