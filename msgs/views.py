@@ -3,8 +3,9 @@ from __future__ import unicode_literals
 
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseBadRequest
+from django.http import HttpResponseBadRequest, JsonResponse
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
 
 from .forms import UserForm, MessageForm
 from .models import Message
@@ -70,3 +71,14 @@ def user_register(request):
             return redirect('frontpage')
 
     return render(request, 'register.html', {'form': user_form})
+
+
+@csrf_exempt
+def ajax_sort_messages(request):
+
+    mess_id = request.GET.get('mess_id')
+
+    messages = Message.get_messages(mess_id=mess_id)
+    parsed_messages = [mess.message_data for mess in messages]
+
+    return JsonResponse({'mess': parsed_messages}, status=200)

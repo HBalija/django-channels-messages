@@ -119,3 +119,6 @@ CHANNEL_LAYERS = {
         "ROUTING": "project.routing.channel_routing",
     },
 }
+
+# number of messages rendered per ajax request
+DEFAULT_NUMBER_OF_MESSAGES = 30

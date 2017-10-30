@@ -4,6 +4,7 @@
     // messaging socket
     var socketMessage = new WebSocket(wsScheme + "://" + window.location.host + "/");
 
+    // set scrollbar to bottom after refresh
     var scrollbar = document.getElementById("js-scrollbar");
     scrollbar.scrollTop = scrollbar.scrollHeight;
 
@@ -23,7 +24,10 @@
         var data = JSON.parse(e.data);
         var msgRow = "<li><strong>" + data.user + "</strong>: " + data.message + "</li>";
 
+        // appending message
         $(".messages-list").append(msgRow);
+
+        // setting scrollbar to bottom after message is received
         scrollbar.scrollTop = scrollbar.scrollHeight;
     };
 

@@ -3,6 +3,9 @@
 }
 
 .messages-list {
+    height: 60vh;
+    overflow: hidden;
     overflow-y: scroll;
-    max-height: 70vh;
+    overflow-x: hidden;
+    border: none;
 }
