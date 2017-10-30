@@ -9,3 +9,7 @@
     overflow-x: hidden;
     border: none;
 }
+
+.navbar-default {
+    background-color: #ABE6F5;
+}
