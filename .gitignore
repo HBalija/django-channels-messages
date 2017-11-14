@@ -7,3 +7,4 @@ htmlcov/
 *.db
 staticfiles/*
 .eslintrc.json
+.tox/
