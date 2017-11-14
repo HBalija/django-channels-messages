@@ -14,7 +14,7 @@ class BaseTest(TestCase):
 class ViewsTest(BaseTest):
 
     def setUp(self):
-        super().setUp()
+        super(ViewsTest, self).setUp()
 
     def test_frontpage_render_succeeds(self):
         resp = self.client.get(reverse('frontpage'))
