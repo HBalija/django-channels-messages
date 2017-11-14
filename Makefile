@@ -14,7 +14,7 @@ test: clean
 
 circle-test:
 	python manage.py collectstatic --noinput --settings=project.settings.test
-	python manage.py test --settings=project.settings.test
+	tox
 
 coverage: clean
 	coverage run --source=. manage.py test --settings=project.settings.test

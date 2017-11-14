@@ -6,4 +6,4 @@ machine:
 
 test:
   override:
-    - tox
+    - make circle-test
