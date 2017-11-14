@@ -1,9 +1,9 @@
 machine:
-  python:
-    version: 3.5.3
+  post:
+    - pyenv global: 2.7.12 3.5.3
   services:
     - redis
 
 test:
   override:
-    - make circle-test
+    - tox
